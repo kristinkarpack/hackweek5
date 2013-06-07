@@ -286,9 +286,9 @@
 			productReference = AAB2062E175C373D0004DA3A /* LinTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		AAEBEB7216E90ACE00A01E48 /* Lin */ = {
+		AAEBEB7216E90ACE00A01E48 /* ZLin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAEBEB8516E90ACE00A01E48 /* Build configuration list for PBXNativeTarget "Lin" */;
+			buildConfigurationList = AAEBEB8516E90ACE00A01E48 /* Build configuration list for PBXNativeTarget "ZLin" */;
 			buildPhases = (
 				AAEBEB6F16E90ACE00A01E48 /* Sources */,
 				AAEBEB7016E90ACE00A01E48 /* Frameworks */,
@@ -298,7 +298,7 @@
 			);
 			dependencies = (
 			);
-			name = Lin;
+			name = ZLin;
 			productName = Lin;
 			productReference = AAEBEB7316E90ACE00A01E48 /* Lin.xcplugin */;
 			productType = "com.apple.product-type.bundle";
@@ -324,7 +324,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AAEBEB7216E90ACE00A01E48 /* Lin */,
+				AAEBEB7216E90ACE00A01E48 /* ZLin */,
 				AAB2062D175C373D0004DA3A /* LinTests */,
 			);
 		};
@@ -399,7 +399,7 @@
 /* Begin PBXTargetDependency section */
 		818D294417624F590039D0B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AAEBEB7216E90ACE00A01E48 /* Lin */;
+			target = AAEBEB7216E90ACE00A01E48 /* ZLin */;
 			targetProxy = 818D294317624F590039D0B0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -574,7 +574,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAEBEB8516E90ACE00A01E48 /* Build configuration list for PBXNativeTarget "Lin" */ = {
+		AAEBEB8516E90ACE00A01E48 /* Build configuration list for PBXNativeTarget "ZLin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAEBEB8616E90ACE00A01E48 /* Debug */,

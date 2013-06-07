@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AAEBEB7216E90ACE00A01E48"
-               BuildableName = "Lin.xcplugin"
-               BlueprintName = "Lin"
+               BuildableName = "ZLin.xcplugin"
+               BlueprintName = "ZLin"
                ReferencedContainer = "container:Lin.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

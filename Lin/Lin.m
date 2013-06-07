@@ -273,7 +273,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 		[[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
 
         // Enable Lin
-		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"Enable Lin" action:@selector(toggle:) keyEquivalent:@""];
+		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"Enable ZLin" action:@selector(toggle:) keyEquivalent:@""];
         menuItem.target = self;
         menuItem.state = enabled ? NSOnState : NSOffState;
 
