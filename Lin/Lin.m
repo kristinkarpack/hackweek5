@@ -51,7 +51,7 @@ static Lin *sharedPlugin = nil;
 static NSString *kLinUserDefaultsEnableKey = @"LINEnabled";
 static NSString *kLinUserDefaultsParseStringsOutsideProjectKey = @"LINParseStringsOutsideProject";
 static NSString *regexs[] = {
-	@"NSLocalizedString\\s*\\(\\s*@\"(.*)\"\\s*,\\s*(.*)\\s*\\)",
+	@"NSLocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)",
 	@"localizedStringForKey:\\s*@\"(.*)\"\\s*value:\\s*(.*)\\s*table:\\s*(.*)",
 	@"NSLocalizedStringFromTable\\s*\\(\\s*@\"(.*)\"\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)",
 	@"NSLocalizedStringFromTableInBundle\\s*\\(\\s*@\"(.*)\"\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)",
@@ -424,13 +424,15 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 
 			[regularExpression enumerateMatchesInString:lineText options:0 range:NSMakeRange(0, lineText.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
 				if(result.numberOfRanges == regEx.numberOfRanges) {
-					matched = YES;
+                    matched = YES;
 
 					entityRangeInLine = [result rangeAtIndex:regEx.entityRangeInLineIndex];
 					keyRangeInLine = [result rangeAtIndex:regEx.keyRangeInLineIndex];
 				}
-
-				*stop = YES;
+                NSRange entityRange = NSMakeRange(lineRange.location + entityRangeInLine.location, entityRangeInLine.length);
+                if(entityRange.location <= selectedRange.location && selectedRange.location <= (entityRange.location + entityRange.length)) {
+                    *stop = YES;
+                }
 			}];
 
 			if(matched)
