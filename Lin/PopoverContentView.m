@@ -12,6 +12,7 @@
 
 #import "LocalizationItem.h"
 #import "ZLocalizableParser.h"
+#import "PopoverAddItemView.h"
 
 @implementation PopoverContentView
 
@@ -44,6 +45,17 @@
     
     // Update filtered items
     [self updateFilteredItems];
+    
+    if (self.filteredLocalizationItems.count == 0)
+    {
+        self.addView = [[PopoverAddItemView alloc] initWithFrame:self.bounds];
+        [self addSubview:self.addView];
+    }
+    else
+    {
+        [self.addView removeFromSuperview];
+        self.addView = nil;
+    }
     
     // Reload table view
     [self.tableView reloadData];
@@ -120,9 +132,12 @@
                 newLocalizationItem.language = textView.textStorage.string;
                 break;
             case 1:
-                newLocalizationItem.key = textView.textStorage.string;
+                // Do nothing if the library has been changed
                 break;
             case 2:
+                newLocalizationItem.key = textView.textStorage.string;
+                break;
+            case 3:
                 newLocalizationItem.stringValue = textView.textStorage.string;
                 break;
             default:

@@ -24,12 +24,10 @@
 @interface PopoverContentView : NSView <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (assign) IBOutlet NSTableView *tableView;
-
 @property (nonatomic, assign) id<PopoverContentViewDelegate> delegate;
-
 @property (nonatomic, copy) NSArray *localizationItems;
 @property (nonatomic, copy) NSArray *filteredLocalizationItems;
-
 @property (nonatomic, copy) NSString *keyFilter;
+@property (nonatomic, weak) NSView *addView;
 
 @end

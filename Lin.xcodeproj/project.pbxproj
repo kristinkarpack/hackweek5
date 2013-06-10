@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		816A75E51766389900086199 /* PopoverAddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 816A75E41766389900086199 /* PopoverAddItemView.m */; };
 		8171D43A1762A5AC007FDAF8 /* LocalizationTestItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 8171D4391762A5AC007FDAF8 /* LocalizationTestItems.m */; };
 		8171D4421762A6D3007FDAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8171D4401762A6D3007FDAF8 /* Localizable.strings */; };
 		818D293E17624D480039D0B0 /* HackWeekHackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D293D17624D480039D0B0 /* HackWeekHackTests.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		816A75E31766389900086199 /* PopoverAddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAddItemView.h; sourceTree = "<group>"; };
+		816A75E41766389900086199 /* PopoverAddItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAddItemView.m; sourceTree = "<group>"; };
 		8171D4381762A5AC007FDAF8 /* LocalizationTestItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationTestItems.h; sourceTree = "<group>"; };
 		8171D4391762A5AC007FDAF8 /* LocalizationTestItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationTestItems.m; sourceTree = "<group>"; };
 		8171D4411762A6D3007FDAF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -86,7 +89,7 @@
 		AAE7FEF616ED9DB200F47363 /* IDEEditorDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorDocument.h; sourceTree = "<group>"; };
 		AAE9880F16ECE84500E61B53 /* Localization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Localization.h; sourceTree = "<group>"; };
 		AAE9881016ECE84500E61B53 /* Localization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Localization.m; sourceTree = "<group>"; };
-		AAEBEB7316E90ACE00A01E48 /* Lin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Lin.xcplugin; path = ZLin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAEBEB7316E90ACE00A01E48 /* ZLin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAEBEB7E16E90ACE00A01E48 /* Lin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lin-Info.plist"; sourceTree = "<group>"; };
 		AAEBEB8016E90ACE00A01E48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AAEBEB8216E90ACE00A01E48 /* Lin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lin-Prefix.pch"; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				AA401F9916EC8959001FF1DA /* PopoverContentView.h */,
 				AA401F9A16EC8959001FF1DA /* PopoverContentView.m */,
 				AA3CE14516EBBC9400E2C972 /* Popover.xib */,
+				816A75E31766389900086199 /* PopoverAddItemView.h */,
+				816A75E41766389900086199 /* PopoverAddItemView.m */,
 			);
 			name = Popover;
 			sourceTree = "<group>";
@@ -222,7 +227,7 @@
 		AAEBEB7416E90ACE00A01E48 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AAEBEB7316E90ACE00A01E48 /* Lin.xcplugin */,
+				AAEBEB7316E90ACE00A01E48 /* ZLin.xcplugin */,
 				AAB2062E175C373D0004DA3A /* LinTests.octest */,
 			);
 			name = Products;
@@ -308,7 +313,7 @@
 			);
 			name = ZLin;
 			productName = Lin;
-			productReference = AAEBEB7316E90ACE00A01E48 /* Lin.xcplugin */;
+			productReference = AAEBEB7316E90ACE00A01E48 /* ZLin.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -401,6 +406,7 @@
 				AA334F8716ED96F300D6E45A /* MethodSwizzle.m in Sources */,
 				818D294217624DB60039D0B0 /* ZLocalizableParser.m in Sources */,
 				8171D43A1762A5AC007FDAF8 /* LocalizationTestItems.m in Sources */,
+				816A75E51766389900086199 /* PopoverAddItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
