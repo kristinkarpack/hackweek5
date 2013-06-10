@@ -12,7 +12,6 @@
 
 #import "LocalizationItem.h"
 #import "ZLocalizableParser.h"
-#import "PopoverAddItemView.h"
 
 @implementation PopoverContentView
 
@@ -48,13 +47,15 @@
     
     if (self.filteredLocalizationItems.count == 0)
     {
-        self.addView = [[PopoverAddItemView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.addView];
+        [self.addView removeFromSuperview];
+        self.addView = nil;
+        PopoverAddItemView *addView = [[PopoverAddItemView alloc] initWithFrame:self.bounds forKey:keyFilter];
+        [self addSubview:addView];
+        self.addView = addView;
     }
     else
     {
         [self.addView removeFromSuperview];
-        self.addView = nil;
     }
     
     // Reload table view

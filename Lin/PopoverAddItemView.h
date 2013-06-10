@@ -8,7 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PopoverAddItemView : NSView
+@interface PopoverAddItemView : NSView<NSTextFieldDelegate>
 
-@property (nonatomic, weak) IBOutlet NSView *nibView;
+@property (nonatomic, weak) NSTextField *keyField;
+@property (nonatomic, weak) NSTextField *valueField;
+@property (nonatomic, weak) NSButton *submitButton;
+@property (nonatomic, copy) NSString *selectedKey;
+
+- (id)initWithFrame:(NSRect)frameRect forKey:(NSString *)key;
+
 @end

@@ -25,9 +25,9 @@
     return [NSLocalizedString(@"key4", nil) isEqualToString:NSLocalizedString(@"key5", nil)];
 }
 
-- (BOOL)testMultipleMatchesOnLineWithNoMatchForSecond
+- (NSString *)testNoMatchFoundAddView
 {
-    return [NSLocalizedString(@"key4", nil) isEqualToString:NSLocalizedString(@"key555", nil)];
+    return NSLocalizedString(@"key555", nil);
 }
 
 @end

@@ -9,6 +9,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "PopoverAddItemView.h"
 
 @class PopoverContentView;
 @class LocalizationItem;
@@ -28,6 +29,6 @@
 @property (nonatomic, copy) NSArray *localizationItems;
 @property (nonatomic, copy) NSArray *filteredLocalizationItems;
 @property (nonatomic, copy) NSString *keyFilter;
-@property (nonatomic, weak) NSView *addView;
+@property (nonatomic, assign) NSView *addView;
 
 @end
