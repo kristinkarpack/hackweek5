@@ -10,4 +10,6 @@
 
 + (NSString *)getLibraryNameFromFilename:(NSString *)filename;
 
++ (NSString *)getBestStringsFileForFile:(NSString *)fileName   fromList:(NSArray *)stringFiles;
+
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "PopoverAddItemView.h"
+#import "ZLocalizableParser.h"
+#import "Lin.h"
 
 #define TEXT_FIELD_WIDTH 200
 #define TEXT_FIELD_HEIGHT 26
@@ -99,16 +101,10 @@
 - (void)buttonPressed
 {
     [self.submitButton setEnabled:NO];
-//    NSString* filePath = [ NSString stringWithString: localizationItem.stringsFilename ];
-//    NSString *text = [NSString stringWithContentsOfFile:filePath encoding:encoding error:&error];
-//    
-//    NSString *newKey = self.keyField.stringValue;
-//    NSString *newValue = self.valueField.stringValue;
-//    NSString *newLine = [NSString stringWithFormat:@"\"%@\" = \"%@\"", newKey, newValue];
-//    
-//    // Save
-//    NSError *error = nil;
-//    [newText writeToFile:filePath atomically:YES encoding:encoding error:&error];
+    
+    NSString *newKey = self.keyField.stringValue;
+    NSString *newValue = self.valueField.stringValue;
+    [[Lin sharedPlugin] addLocalizationItemInCurrentPathForKey:newKey value:newValue];
 }
 
 @end

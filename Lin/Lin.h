@@ -35,5 +35,6 @@
 
 - (void)indexNeedsUpdate:(IDEIndex *)index;
 - (void)removeFilesForIndex:(IDEIndex *)index;
+- (void)addLocalizationItemInCurrentPathForKey:(NSString *)key value:(NSString *)value;
 
 @end

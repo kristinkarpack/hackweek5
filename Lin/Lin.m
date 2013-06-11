@@ -11,15 +11,15 @@
 #import "Lin.h"
 
 // Xcode Classes
-#import "DVTFilePath.h"
 #import "IDEIndex.h"
 #import "IDEIndexCollection.h"
-#import "IDEWorkspace.h"
 #import "IDEEditorDocument.h"
+#import "RCXcode.h"
 
 // Localization
 #import "Localization.h"
 #import "LocalizationItem.h"
+#import "ZLocalizableParser.h"
 
 @interface RegEx : NSObject
 
@@ -51,7 +51,7 @@ static Lin *sharedPlugin = nil;
 static NSString *kLinUserDefaultsEnableKey = @"LINEnabled";
 static NSString *kLinUserDefaultsParseStringsOutsideProjectKey = @"LINParseStringsOutsideProject";
 static NSString *regexs[] = {
-	@"NSLocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)",
+	@"LocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)",
 	@"localizedStringForKey:\\s*@\"(.*)\"\\s*value:\\s*(.*)\\s*table:\\s*(.*)",
 	@"NSLocalizedStringFromTable\\s*\\(\\s*@\"(.*)\"\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)",
 	@"NSLocalizedStringFromTableInBundle\\s*\\(\\s*@\"(.*)\"\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\)",
@@ -124,6 +124,8 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 		}
 		_regexs = [NSArray arrayWithArray: pTempRegexs];
 		[pTempRegexs release];
+        
+        self.parseStringsOutsideProject = YES;
     }
 
     return self;
@@ -155,6 +157,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_textView release];
 
     [_currentWorkspacePath release];
@@ -164,6 +167,25 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
     [super dealloc];
 }
 
+- (void)addLocalizationItemInCurrentPathForKey:(NSString *)key value:(NSString *)value
+{
+    NSString *currentEditor = [RCXcode currentSourceCodeDocument].fileURL.absoluteString;
+    NSLog(@"    MY FILENAME :  %@", currentEditor);
+    NSArray *localizationFileSet = [self.localizationFileSets objectForKey:self.currentWorkspacePath];
+    NSLog(@"    MY LOCAL FILE SET IS : %@", localizationFileSet);
+    NSString *stringFilePath = [ZLocalizableParser getBestStringsFileForFile:currentEditor fromList:localizationFileSet];
+    NSStringEncoding encoding = NSUTF8StringEncoding;
+	
+    if(stringFilePath) {
+        NSError *error = nil;
+        NSString *text = [NSString stringWithContentsOfFile:stringFilePath encoding:encoding error:&error];
+        text = [text stringByAppendingFormat:@"\n\"%@\" = \"%@\";\n", key, value];
+        [text writeToFile:stringFilePath atomically:YES encoding:encoding error:&error];
+        
+    }
+    
+    [self updateLocalizationsForWorkspace:self.currentWorkspacePath];
+}
 
 #pragma mark - Setup
 
@@ -219,7 +241,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         [self.localizations removeObjectForKey:workspaceFilePath];
 
         // Find .strings files
-        IDEIndexCollection *indexCollection = [index filesContaining:@".strings" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
+        IDEIndexCollection *indexCollection = [index filesContaining:@"Localizable.strings" anchorStart:YES anchorEnd:YES subsequence:NO ignoreCase:NO cancelWhen:nil];
 
         NSMutableSet *localizationFileSet = [NSMutableSet set];
 
@@ -267,7 +289,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         // Load defaults
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         BOOL enabled = [userDefaults boolForKey:kLinUserDefaultsEnableKey];
-        BOOL parseStringsOutsideProject = [userDefaults boolForKey:kLinUserDefaultsParseStringsOutsideProjectKey];
+        //BOOL parseStringsOutsideProject = //[userDefaults boolForKey:kLinUserDefaultsParseStringsOutsideProjectKey];
 
         // Separator
 		[[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
@@ -280,13 +302,13 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 		[[editMenuItem submenu] addItem:menuItem];
         [menuItem release];
 
-        // Parse .strings outside project's path
-		menuItem = [[NSMenuItem alloc] initWithTitle:@"Parse .strings outside project's path" action:@selector(toggleParse:) keyEquivalent:@""];
-        menuItem.target = self;
-        menuItem.state = parseStringsOutsideProject ? NSOnState : NSOffState;
-
-		[[editMenuItem submenu] addItem:menuItem];
-        [menuItem release];
+//        // Parse .strings outside project's path
+//		menuItem = [[NSMenuItem alloc] initWithTitle:@"Parse .strings outside project's path" action:@selector(toggleParse:) keyEquivalent:@""];
+//        menuItem.target = self;
+//        menuItem.state = parseStringsOutsideProject ? NSOnState : NSOffState;
+//
+//		[[editMenuItem submenu] addItem:menuItem];
+//        [menuItem release];
     }
 }
 

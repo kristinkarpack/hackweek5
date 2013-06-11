@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		811EC26D1767B92800B32965 /* RCXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 811EC26C1767B92800B32965 /* RCXcode.m */; };
 		816A75E51766389900086199 /* PopoverAddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 816A75E41766389900086199 /* PopoverAddItemView.m */; };
 		8171D43A1762A5AC007FDAF8 /* LocalizationTestItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 8171D4391762A5AC007FDAF8 /* LocalizationTestItems.m */; };
 		8171D4421762A6D3007FDAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8171D4401762A6D3007FDAF8 /* Localizable.strings */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		811EC26B1767B92800B32965 /* RCXcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCXcode.h; sourceTree = "<group>"; };
+		811EC26C1767B92800B32965 /* RCXcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCXcode.m; sourceTree = "<group>"; };
 		816A75E31766389900086199 /* PopoverAddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAddItemView.h; sourceTree = "<group>"; };
 		816A75E41766389900086199 /* PopoverAddItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAddItemView.m; sourceTree = "<group>"; };
 		8171D4381762A5AC007FDAF8 /* LocalizationTestItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationTestItems.h; sourceTree = "<group>"; };
@@ -67,13 +70,11 @@
 		AA10659A16ECF48600443AC5 /* LocalizationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationItem.m; sourceTree = "<group>"; };
 		AA1D9DE616E9182B0039B83D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		AA1D9DE816E9182F0039B83D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		AA21BD8116EC7EC100E0115B /* DVTFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFilePath.h; sourceTree = "<group>"; };
 		AA334F8516ED96F300D6E45A /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzle.h; sourceTree = "<group>"; };
 		AA334F8616ED96F300D6E45A /* MethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodSwizzle.m; sourceTree = "<group>"; };
 		AA3CE14516EBBC9400E2C972 /* Popover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Popover.xib; sourceTree = "<group>"; };
 		AA3E93F416EBE90E00BA6E60 /* IDEWorkspace+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspace+Lin.h"; sourceTree = "<group>"; };
 		AA3E93F516EBE90E00BA6E60 /* IDEWorkspace+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspace+Lin.m"; sourceTree = "<group>"; };
-		AA3E93F716EBE99000BA6E60 /* IDEWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
 		AA3E93FA16EBE99A00BA6E60 /* IDEIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEIndex.h; sourceTree = "<group>"; };
 		AA3E93FD16EBEAD400BA6E60 /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = /Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<absolute>"; };
 		AA3E93FE16EBEAD400BA6E60 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = /Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<absolute>"; };
@@ -147,10 +148,10 @@
 		AA0ABDEC16EC852300DC3697 /* XcodeClasses */ = {
 			isa = PBXGroup;
 			children = (
-				AA21BD8116EC7EC100E0115B /* DVTFilePath.h */,
+				811EC26B1767B92800B32965 /* RCXcode.h */,
+				811EC26C1767B92800B32965 /* RCXcode.m */,
 				AA3E93FA16EBE99A00BA6E60 /* IDEIndex.h */,
 				AA55627B16EDA3230094FA4D /* IDEIndexCollection.h */,
-				AA3E93F716EBE99000BA6E60 /* IDEWorkspace.h */,
 				AAE7FEF616ED9DB200F47363 /* IDEEditorDocument.h */,
 			);
 			name = XcodeClasses;
@@ -407,6 +408,7 @@
 				818D294217624DB60039D0B0 /* ZLocalizableParser.m in Sources */,
 				8171D43A1762A5AC007FDAF8 /* LocalizationTestItems.m in Sources */,
 				816A75E51766389900086199 /* PopoverAddItemView.m in Sources */,
+				811EC26D1767B92800B32965 /* RCXcode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
