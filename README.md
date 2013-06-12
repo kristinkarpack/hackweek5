@@ -5,7 +5,10 @@ Building on [the original XCode plugin for displaying localized string macros](h
 ###Features
 **Display matching values for localized string keys**
 
-![Feature1](http://imgur.com/HjBIHSn)
+![Feature1](http://i.imgur.com/HjBIHSn.png)
 
+**Search workspace for keys without corresponding values**
+
+![Feature2](http://i.imgur.com/1VIi69U.png)
 
 
