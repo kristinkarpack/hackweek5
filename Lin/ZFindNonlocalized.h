@@ -13,6 +13,6 @@
 
 @interface ZFindNonlocalized : NSObject
 
-+ (void)startSearchForUnlocalizedStringsForIndex:(IDEIndex *)index withLocalization:(Localization *)localizations;
++ (NSArray *)startSearchForUnlocalizedStringsForIndex:(IDEIndex *)index withLocalization:(Localization *)localizations;
 
 @end

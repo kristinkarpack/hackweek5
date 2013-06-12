@@ -14,7 +14,9 @@
 		818D293E17624D480039D0B0 /* HackWeekHackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D293D17624D480039D0B0 /* HackWeekHackTests.m */; };
 		818D294217624DB60039D0B0 /* ZLocalizableParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D294117624DB60039D0B0 /* ZLocalizableParser.m */; };
 		818D294617624FB20039D0B0 /* ZLocalizableParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 818D294117624DB60039D0B0 /* ZLocalizableParser.m */; };
+		81C6D80C17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C6D80B17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m */; };
 		81DFE59D1767DA0000101998 /* ZFindNonlocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DFE59C1767DA0000101998 /* ZFindNonlocalized.m */; };
+		81F4A7EC1769178A00388114 /* ZUnlocalizedStringErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F4A7EB1769178A00388114 /* ZUnlocalizedStringErrorView.xib */; };
 		AA0ABDEA16EC850000DC3697 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0ABDE816EC850000DC3697 /* DVTFoundation.framework */; };
 		AA0ABDEB16EC850000DC3697 /* DVTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0ABDE916EC850000DC3697 /* DVTKit.framework */; };
 		AA10659B16ECF48600443AC5 /* LocalizationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA10659A16ECF48600443AC5 /* LocalizationItem.m */; };
@@ -60,8 +62,11 @@
 		818D293D17624D480039D0B0 /* HackWeekHackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackWeekHackTests.m; sourceTree = "<group>"; };
 		818D294017624DB60039D0B0 /* ZLocalizableParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLocalizableParser.h; sourceTree = "<group>"; };
 		818D294117624DB60039D0B0 /* ZLocalizableParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLocalizableParser.m; sourceTree = "<group>"; };
+		81C6D80A17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUnlocalizedStringErrorViewController.h; sourceTree = "<group>"; };
+		81C6D80B17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUnlocalizedStringErrorViewController.m; sourceTree = "<group>"; };
 		81DFE59B1767DA0000101998 /* ZFindNonlocalized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFindNonlocalized.h; sourceTree = "<group>"; };
 		81DFE59C1767DA0000101998 /* ZFindNonlocalized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFindNonlocalized.m; sourceTree = "<group>"; };
+		81F4A7EB1769178A00388114 /* ZUnlocalizedStringErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZUnlocalizedStringErrorView.xib; sourceTree = "<group>"; };
 		9A668A7117300E9900EE3C8E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9A668A7317300E9900EE3C8E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		9A668A7617300E9900EE3C8E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -136,6 +141,9 @@
 				818D294117624DB60039D0B0 /* ZLocalizableParser.m */,
 				81DFE59B1767DA0000101998 /* ZFindNonlocalized.h */,
 				81DFE59C1767DA0000101998 /* ZFindNonlocalized.m */,
+				81F4A7EB1769178A00388114 /* ZUnlocalizedStringErrorView.xib */,
+				81C6D80A17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.h */,
+				81C6D80B17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m */,
 			);
 			name = HackWeekAdditions;
 			sourceTree = "<group>";
@@ -365,6 +373,7 @@
 				AAEBEB8116E90ACE00A01E48 /* InfoPlist.strings in Resources */,
 				AA3CE14616EBBC9400E2C972 /* Popover.xib in Resources */,
 				8171D4421762A6D3007FDAF8 /* Localizable.strings in Resources */,
+				81F4A7EC1769178A00388114 /* ZUnlocalizedStringErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +424,7 @@
 				816A75E51766389900086199 /* PopoverAddItemView.m in Sources */,
 				811EC26D1767B92800B32965 /* RCXcode.m in Sources */,
 				81DFE59D1767DA0000101998 /* ZFindNonlocalized.m in Sources */,
+				81C6D80C17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

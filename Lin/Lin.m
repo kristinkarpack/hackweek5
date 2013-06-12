@@ -21,6 +21,7 @@
 #import "LocalizationItem.h"
 #import "ZLocalizableParser.h"
 #import "ZFindNonlocalized.h"
+#import "ZUnlocalizedStringErrorViewController.h"
 
 @interface RegEx : NSObject
 
@@ -301,7 +302,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         [menuItem release];
 
         // Start searching for keys without values
-		menuItem = [[NSMenuItem alloc] initWithTitle:@"Launch search for unlocalized strings" action:@selector(startUnlocalizedSearch:) keyEquivalent:@""];
+		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for unlocalized strings" action:@selector(startUnlocalizedSearch:) keyEquivalent:@""];
         menuItem.target = self;
 		[[editMenuItem submenu] addItem:menuItem];
         [menuItem release];
@@ -327,8 +328,22 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 - (void)startUnlocalizedSearch:(id)sender
 {
     IDEIndex *workspaceIndex = [RCXcode currentWorkspaceDocument].workspace.index;
-    [ZFindNonlocalized startSearchForUnlocalizedStringsForIndex:workspaceIndex
-                                               withLocalization:[self.localizations objectForKey:self.currentWorkspacePath]];
+    NSArray *errors = [ZFindNonlocalized startSearchForUnlocalizedStringsForIndex:workspaceIndex
+                                                                 withLocalization:[self.localizations objectForKey:self.currentWorkspacePath]];
+    NSPanel *panel = [[NSPanel alloc] initWithContentRect:NSMakeRect(0, 0, 600, 600)
+                                                styleMask:(NSTitledWindowMask)
+                                                  backing:NSBackingStoreBuffered defer:NO];
+    [panel setReleasedWhenClosed:YES];
+    [panel setWorksWhenModal:YES];
+    
+    ZUnlocalizedStringErrorViewController *viewController = [[ZUnlocalizedStringErrorViewController alloc] init];
+    viewController.closeBlock = ^(id sender) {
+        [NSApp endSheet:panel];
+        [panel orderOut:nil];
+    };
+    viewController.errorItems = errors;
+    [panel setContentView:viewController.view];
+    [NSApp runModalForWindow:panel];
 }
 
 

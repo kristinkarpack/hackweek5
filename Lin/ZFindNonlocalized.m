@@ -14,7 +14,7 @@
 
 @implementation ZFindNonlocalized
 
-+ (void)startSearchForUnlocalizedStringsForIndex:(IDEIndex *)index withLocalization:(Localization *)localization
++ (NSArray *)startSearchForUnlocalizedStringsForIndex:(IDEIndex *)index withLocalization:(Localization *)localization
 {
     // Get all files to parse calls from
     IDEIndexCollection *indexCollection = [index filesContaining:@".m" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
@@ -65,6 +65,8 @@
         [allKeysForLibrary addObject:item.key];
     }
     
+    NSMutableArray *errors = [NSMutableArray array];
+    
     // Now look at the difference between the two sets
     // TODO(kristini): add extra loop to deal with having a corresponding value for every langauge (one to many relationship)
     for (NSString *library in [dictionaryOfKeysGroupedByLibrary allKeys])
@@ -75,10 +77,11 @@
         {
             if (![keysInStringsFiles containsObject:keyInSourceFile])
             {
-                NSLog(@" ALERT ALERT ALERT ALERT : cannot find value for key %@ in library %@", keyInSourceFile, library);
+                [errors addObject:[NSString stringWithFormat:@"Cannot find value for key \"%@\" in library %@", keyInSourceFile, library]];
             }
         }
     }
+    return errors;
 }
 
 
