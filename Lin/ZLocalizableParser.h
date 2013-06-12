@@ -8,7 +8,9 @@
 
 @interface ZLocalizableParser : NSObject 
 
-+ (NSString *)getLibraryNameFromFilename:(NSString *)filename;
++ (NSString *)getLibraryNameFromStringsFilename:(NSString *)filename;
+
++ (NSString *)getLibraryNameFromSourceFilename:(NSString *)filename;
 
 + (NSString *)getBestStringsFileForFile:(NSString *)fileName   fromList:(NSArray *)stringFiles;
 

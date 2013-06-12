@@ -20,6 +20,7 @@
 #import "Localization.h"
 #import "LocalizationItem.h"
 #import "ZLocalizableParser.h"
+#import "ZFindNonlocalized.h"
 
 @interface RegEx : NSObject
 
@@ -170,9 +171,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 - (void)addLocalizationItemInCurrentPathForKey:(NSString *)key value:(NSString *)value
 {
     NSString *currentEditor = [RCXcode currentSourceCodeDocument].fileURL.absoluteString;
-    NSLog(@"    MY FILENAME :  %@", currentEditor);
     NSArray *localizationFileSet = [self.localizationFileSets objectForKey:self.currentWorkspacePath];
-    NSLog(@"    MY LOCAL FILE SET IS : %@", localizationFileSet);
     NSString *stringFilePath = [ZLocalizableParser getBestStringsFileForFile:currentEditor fromList:localizationFileSet];
     NSStringEncoding encoding = NSUTF8StringEncoding;
 	
@@ -289,7 +288,6 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         // Load defaults
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         BOOL enabled = [userDefaults boolForKey:kLinUserDefaultsEnableKey];
-        //BOOL parseStringsOutsideProject = //[userDefaults boolForKey:kLinUserDefaultsParseStringsOutsideProjectKey];
 
         // Separator
 		[[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
@@ -302,13 +300,11 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 		[[editMenuItem submenu] addItem:menuItem];
         [menuItem release];
 
-//        // Parse .strings outside project's path
-//		menuItem = [[NSMenuItem alloc] initWithTitle:@"Parse .strings outside project's path" action:@selector(toggleParse:) keyEquivalent:@""];
-//        menuItem.target = self;
-//        menuItem.state = parseStringsOutsideProject ? NSOnState : NSOffState;
-//
-//		[[editMenuItem submenu] addItem:menuItem];
-//        [menuItem release];
+        // Start searching for keys without values
+		menuItem = [[NSMenuItem alloc] initWithTitle:@"Launch search for unlocalized strings" action:@selector(startUnlocalizedSearch:) keyEquivalent:@""];
+        menuItem.target = self;
+		[[editMenuItem submenu] addItem:menuItem];
+        [menuItem release];
     }
 }
 
@@ -328,14 +324,11 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
     }
 }
 
-- (void)toggleParse:(id)sender
+- (void)startUnlocalizedSearch:(id)sender
 {
-    // Save defaults
-    self.parseStringsOutsideProject = !self.parseStringsOutsideProject;
-
-    // Update menu item
-    NSMenuItem *menuItem = (NSMenuItem *)sender;
-    menuItem.state = self.parseStringsOutsideProject ? NSOnState : NSOffState;
+    IDEIndex *workspaceIndex = [RCXcode currentWorkspaceDocument].workspace.index;
+    [ZFindNonlocalized startSearchForUnlocalizedStringsForIndex:workspaceIndex
+                                               withLocalization:[self.localizations objectForKey:self.currentWorkspacePath]];
 }
 
 

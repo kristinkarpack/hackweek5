@@ -10,7 +10,7 @@
 
 @implementation ZLocalizableParser
 
-+ (NSString *)getLibraryNameFromFilename:(NSString *)filename
++ (NSString *)getLibraryNameFromStringsFilename:(NSString *)filename
 {
     if ([filename rangeOfString:@"lib"].location == NSNotFound)
     {
@@ -26,7 +26,7 @@
     return [pathComponents objectAtIndex:([pathComponents count] - 4)];
 }
 
-+ (NSString *)internalLibraryNameFromSourceFile:(NSString *)name
++ (NSString *)getLibraryNameFromSourceFilename:(NSString *)name
 {
     if ([name rangeOfString:@"lib"].location == NSNotFound)
     {
@@ -43,8 +43,8 @@
     NSString *bestStringsMatch = nil;
     for(NSString *stringsFile in stringFiles)
     {
-        if ([[ZLocalizableParser internalLibraryNameFromSourceFile:fileName]
-            isEqualToString:[ZLocalizableParser getLibraryNameFromFilename:stringsFile]])
+        if ([[ZLocalizableParser getLibraryNameFromSourceFilename:fileName]
+            isEqualToString:[ZLocalizableParser getLibraryNameFromStringsFilename:stringsFile]])
         {
             return stringsFile;
         }

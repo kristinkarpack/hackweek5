@@ -167,7 +167,7 @@
         return localizationItem.language;
     }
     else if([identifier isEqualToString:@"library"]) {
-        return [ZLocalizableParser getLibraryNameFromFilename:localizationItem.stringsFilename];
+        return [ZLocalizableParser getLibraryNameFromStringsFilename:localizationItem.stringsFilename];
     }
     else if([identifier isEqualToString:@"key"]) {
         return localizationItem.key;
