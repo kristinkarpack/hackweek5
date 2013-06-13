@@ -13,7 +13,7 @@
 #define NSLOCALIZED_REGEX @"LocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)"
 #define UNLOCALIZED_REGEX @"(.*?)@\"(.*?)\""
 // Try to avoid nib and image names, CoreData strings, dictionary keys, debug logs and asserts, etc.
-#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"BUNDLE", @"event", @"Image", @"NSFetch", @"_PROPERTY(", @"predicateWithFormat", @"pathForResource", @"fileURLWithPath", @"fontWithName", @"stringByAppendingPathComponent"]
+#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"bundle", @"event", @"NSFetch", @"_PROPERTY(", @"predicateWithFormat", @"pathForResource", @"fileURLWithPath", @"fontWithName", @"stringByAppendingPathComponent"]
 
 @implementation ZFindNonlocalized
 
@@ -26,7 +26,7 @@
     
     for(DVTFilePath *filePath in indexCollection) {
         NSString *pathString = filePath.pathString;
-        if (([pathString rangeOfString:@"Test"].location == NSNotFound) && ([pathString rangeOfString:@"Test"].location == NSNotFound))
+        if (([pathString rangeOfString:@"Test"].location == NSNotFound) && ([pathString rangeOfString:@".strings"].location == NSNotFound))
         {
             [fileSet addObject:pathString];
         }
@@ -47,7 +47,7 @@
              BOOL shouldExclude = NO;
              for (NSString *exclude in EXCLUDE_STRINGS)
              {
-                 if ([match rangeOfString:exclude].location != NSNotFound)
+                 if ([match rangeOfString:exclude options:NSCaseInsensitiveSearch].location != NSNotFound)
                  {
                      shouldExclude = YES;
                  }
