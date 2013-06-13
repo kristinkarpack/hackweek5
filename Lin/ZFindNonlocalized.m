@@ -11,10 +11,55 @@
 #import "LocalizationItem.h"
 
 #define NSLOCALIZED_REGEX @"LocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)"
+#define UNLOCALIZED_REGEX @"(.*?)@\"(.*?)\""
+#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"BUNDLE", @"event"]
 
 @implementation ZFindNonlocalized
 
-+ (NSArray *)startSearchForUnlocalizedStringsForIndex:(IDEIndex *)index withLocalization:(Localization *)localization
++ (void)searchForUnlocalizedStringsForIndex:(IDEIndex *)index completionBlock:(void (^)(NSArray *errors))block
+{
+    // Get all files to parse calls from
+    IDEIndexCollection *indexCollection = [index filesContaining:@".m" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
+    
+    NSMutableSet *fileSet = [NSMutableSet set];
+    
+    for(DVTFilePath *filePath in indexCollection) {
+        NSString *pathString = filePath.pathString;
+        if (([pathString rangeOfString:@"Test"].location == NSNotFound) && ([pathString rangeOfString:@"Test"].location == NSNotFound))
+        {
+            [fileSet addObject:pathString];
+        }
+    }
+    
+    // Now search for strings
+    NSMutableArray *unlocalizedStrings = [NSMutableArray array];
+    for (NSString *sourceFilePath in fileSet)
+    {
+        NSError *error = nil;
+        NSString *contents = [NSString stringWithContentsOfFile:sourceFilePath encoding:NSUTF8StringEncoding error:&error];
+        
+        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:UNLOCALIZED_REGEX options:0 error:NULL];
+        [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, contents.length)
+                                         usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+         {
+             NSString *match = [[contents substringWithRange:[result range]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+             BOOL shouldExclude = NO;
+             for (NSString *exclude in EXCLUDE_STRINGS)
+             {
+                 if ([match rangeOfString:exclude].location != NSNotFound)
+                 {
+                     shouldExclude = YES;
+                 }
+             }
+             if (!shouldExclude && (unlocalizedStrings.count < 100)) {
+                 [unlocalizedStrings addObject:[NSString stringWithFormat:@" this is my match %@", match]];
+              }
+         }];
+    }
+    block(unlocalizedStrings);
+}
+
++ (void)searchForKeysWithoutValuesForIndex:(IDEIndex *)index withLocalization:(Localization *)localization completionBlock:(void (^)(NSArray *errors))block
 {
     // Get all files to parse calls from
     IDEIndexCollection *indexCollection = [index filesContaining:@".m" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
@@ -100,7 +145,7 @@
             }
         }
     }
-    return errors;
+    block(errors);
 }
 
 @end

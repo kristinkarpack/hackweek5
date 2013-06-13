@@ -302,7 +302,13 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         [menuItem release];
 
         // Start searching for keys without values
-		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for unlocalized strings" action:@selector(startUnlocalizedSearch:) keyEquivalent:@""];
+		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for keys missing values" action:@selector(startSearchForKeysWithoutValues:) keyEquivalent:@""];
+        menuItem.target = self;
+		[[editMenuItem submenu] addItem:menuItem];
+        [menuItem release];
+        
+        // Start searching for unlocalized strings
+		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for unlocalized strings" action:@selector(startSearchForUnlocalizedStrings:) keyEquivalent:@""];
         menuItem.target = self;
 		[[editMenuItem submenu] addItem:menuItem];
         [menuItem release];
@@ -325,13 +331,36 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
     }
 }
 
-- (void)startUnlocalizedSearch:(id)sender
+- (void)startSearchForKeysWithoutValues:(id)sender
 {
-    IDEIndex *workspaceIndex = [RCXcode currentWorkspaceDocument].workspace.index;
-    NSArray *errors = [ZFindNonlocalized startSearchForUnlocalizedStringsForIndex:workspaceIndex
-                                                                 withLocalization:[self.localizations objectForKey:self.currentWorkspacePath]];
     NSPanel *panel = [[NSPanel alloc] initWithContentRect:NSMakeRect(0, 0, 600, 600)
-                                                styleMask:(NSTitledWindowMask)
+                                                styleMask:(NSTitledWindowMask | NSResizableWindowMask)
+                                                  backing:NSBackingStoreBuffered defer:NO];
+    [panel setReleasedWhenClosed:YES];
+    [panel setWorksWhenModal:YES];
+    ZUnlocalizedStringErrorViewController *viewController = [[ZUnlocalizedStringErrorViewController alloc] init];
+    viewController.closeBlock = ^(id sender) {
+        [NSApp endSheet:panel];
+        [panel orderOut:nil];
+    };
+    [viewController setTitleFormat:@"%@ key%@ found in current workspace"];
+    [panel setContentView:viewController.view];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+                                             (unsigned long)NULL), ^(void) {
+        [ZFindNonlocalized searchForKeysWithoutValuesForIndex:[RCXcode currentWorkspaceDocument].workspace.index
+                                             withLocalization:[self.localizations objectForKey:self.currentWorkspacePath]
+                                              completionBlock:^(NSArray *errors) {
+                                                  viewController.errorItems = errors;
+                                              }];
+    });
+    [NSApp runModalForWindow:panel];
+}
+
+- (void)startSearchForUnlocalizedStrings:(id)sender
+{
+    NSPanel *panel = [[NSPanel alloc] initWithContentRect:NSMakeRect(0, 0, 600, 600)
+                                                styleMask:(NSTitledWindowMask | NSResizableWindowMask)
                                                   backing:NSBackingStoreBuffered defer:NO];
     [panel setReleasedWhenClosed:YES];
     [panel setWorksWhenModal:YES];
@@ -341,11 +370,17 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         [NSApp endSheet:panel];
         [panel orderOut:nil];
     };
-    viewController.errorItems = errors;
+    [viewController setTitleFormat:@"%@ unlocalized string%@ found in current workspace"];
     [panel setContentView:viewController.view];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
+                                             (unsigned long)NULL), ^(void) {
+        [ZFindNonlocalized searchForUnlocalizedStringsForIndex:[RCXcode currentWorkspaceDocument].workspace.index
+                                               completionBlock:^(NSArray *errors) {
+                                                   viewController.errorItems = errors;
+                                               }];
+    });
     [NSApp runModalForWindow:panel];
 }
-
 
 #pragma mark - Notification
 

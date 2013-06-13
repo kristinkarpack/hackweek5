@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         [NSBundle loadNibNamed:@"ZUnlocalizedStringErrorView" owner:self];
+        [self.spinner startAnimation:self];
     }
     
     return self;
@@ -29,11 +30,12 @@
 - (void)setErrorItems:(NSArray *)errorItems
 {
     _errorItems = errorItems;
-    NSString *titleFormat = @"%@ unlocalized string%@ found in current workspace";
+    [self.spinner removeFromSuperview];
     NSString *count = [@(errorItems.count) stringValue];
-    NSString *title = [NSString stringWithFormat:titleFormat, ([count isEqualToString:@"0"] ? @"No" : count),
+    NSString *title = [NSString stringWithFormat:self.titleFormat, ([count isEqualToString:@"0"] ? @"No" : count),
                        ([count isEqualToString:@"1"] ? @"" : @"s")];
     [self.titleLabel setStringValue:title];
+    [self.tableView reloadData];
 }
 
 #pragma mark - NSTableViewDataSource
