@@ -12,7 +12,8 @@
 
 #define NSLOCALIZED_REGEX @"LocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)"
 #define UNLOCALIZED_REGEX @"(.*?)@\"(.*?)\""
-#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"BUNDLE", @"event"]
+// Try to avoid nib and image names, CoreData strings, dictionary keys, debug logs and asserts, etc.
+#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"BUNDLE", @"event", @"Image", @"NSFetch", @"_PROPERTY(", @"predicateWithFormat", @"pathForResource", @"fileURLWithPath", @"fontWithName", @"stringByAppendingPathComponent"]
 
 @implementation ZFindNonlocalized
 
@@ -51,8 +52,9 @@
                      shouldExclude = YES;
                  }
              }
-             if (!shouldExclude && (unlocalizedStrings.count < 100)) {
-                 [unlocalizedStrings addObject:[NSString stringWithFormat:@" this is my match %@", match]];
+             if (!shouldExclude) {
+                 [unlocalizedStrings addObject:
+                    [NSString stringWithFormat:@"Possible unlocalized string in file %@: %@", [sourceFilePath lastPathComponent], match]];
               }
          }];
     }

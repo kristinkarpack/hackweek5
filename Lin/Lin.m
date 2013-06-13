@@ -345,7 +345,8 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
     };
     [viewController setTitleFormat:@"%@ key%@ found in current workspace"];
     [panel setContentView:viewController.view];
-
+    [panel setContentMaxSize:NSMakeSize(1200, 600)];
+    [panel setContentMinSize:NSMakeSize(600, 600)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
                                              (unsigned long)NULL), ^(void) {
         [ZFindNonlocalized searchForKeysWithoutValuesForIndex:[RCXcode currentWorkspaceDocument].workspace.index
@@ -372,6 +373,8 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
     };
     [viewController setTitleFormat:@"%@ unlocalized string%@ found in current workspace"];
     [panel setContentView:viewController.view];
+    [panel setContentMaxSize:NSMakeSize(1200, 600)];
+    [panel setContentMinSize:NSMakeSize(600, 600)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,
                                              (unsigned long)NULL), ^(void) {
         [ZFindNonlocalized searchForUnlocalizedStringsForIndex:[RCXcode currentWorkspaceDocument].workspace.index
