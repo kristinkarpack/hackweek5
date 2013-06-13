@@ -7,8 +7,7 @@ Building on [the original XCode plugin for displaying localized string macros](h
 
 ![Feature1](http://i.imgur.com/HjBIHSn.png)
 
-**Search workspace for keys without corresponding values**
+**Search workspace for keys that don't have values for one or more languages**
 
-![Feature2](http://i.imgur.com/1VIi69U.png)
-
+![Feature2](http://i.imgur.com/CD1ewne.png)
 
