@@ -50,13 +50,14 @@
 						<string key="NSFrame">{{47, 463}, {382, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="425481406"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="190684533">
 							<int key="NSCellFlags">68157504</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents">Unlocalized strings found in current workspace:</string>
-							<object class="NSFont" key="NSSupport">
+							<object class="NSFont" key="NSSupport" id="166528797">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">14</double>
 								<int key="NSfFlags">16</int>
@@ -170,14 +171,10 @@
 													</object>
 												</object>
 												<object class="NSTextFieldCell" key="NSDataCell" id="735860008">
-													<int key="NSCellFlags">874512448</int>
-													<int key="NSCellFlags2">33556480</int>
+													<int key="NSCellFlags">337641536</int>
+													<int key="NSCellFlags2">33560576</int>
 													<string key="NSContents">Text Cell</string>
-													<object class="NSFont" key="NSSupport">
-														<string key="NSName">LucidaGrande</string>
-														<double key="NSSize">13</double>
-														<int key="NSfFlags">1044</int>
-													</object>
+													<reference key="NSSupport" ref="166528797"/>
 													<reference key="NSControlView" ref="968810387"/>
 													<object class="NSColor" key="NSBackgroundColor" id="396931592">
 														<int key="NSColorSpace">6</int>
@@ -205,7 +202,7 @@
 												<bytes key="NSWhite">MC41AA</bytes>
 											</object>
 										</object>
-										<double key="NSRowHeight">18</double>
+										<double key="NSRowHeight">24</double>
 										<int key="NSTvFlags">-1841299456</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
@@ -257,13 +254,13 @@
 						<string key="NSFrame">{{50, 50}, {400, 400}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="109673424"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">264754</int>
 						<reference key="NSVScroller" ref="764743023"/>
 						<reference key="NSHScroller" ref="490479806"/>
 						<reference key="NSContentView" ref="109673424"/>
-						<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
+						<bytes key="NSScrollAmts">QSAAAEEgAABB0AAAQdAAAA</bytes>
 						<double key="NSMinMagnification">0.25</double>
 						<double key="NSMaxMagnification">4</double>
 						<double key="NSMagnification">1</double>
@@ -272,7 +269,7 @@
 				<string key="NSFrameSize">{500, 500}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="425481406"/>
+				<reference key="NSNextKeyView" ref="851611568"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 		</array>
@@ -293,6 +290,14 @@
 						<reference key="destination" ref="1005"/>
 					</object>
 					<int key="connectionID">437</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">titleLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="851611568"/>
+					</object>
+					<int key="connectionID">449</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -623,9 +628,9 @@
 						<reference key="parent" ref="851611568"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">444</int>
-						<reference key="object" ref="872232694"/>
-						<reference key="parent" ref="1005"/>
+						<int key="objectID">446</int>
+						<reference key="object" ref="924731787"/>
+						<reference key="parent" ref="851611568"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">445</int>
@@ -633,9 +638,9 @@
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">446</int>
-						<reference key="object" ref="924731787"/>
-						<reference key="parent" ref="851611568"/>
+						<int key="objectID">444</int>
+						<reference key="object" ref="872232694"/>
+						<reference key="parent" ref="1005"/>
 					</object>
 				</array>
 			</object>
@@ -690,7 +695,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">446</int>
+			<int key="maxID">449</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -705,15 +710,15 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ZUnlocalizedStringErrorViewController</string>
 					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">closeButtonClicked:</string>
-						<string key="NS.object.0">id</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">titleLabel</string>
+						<string key="NS.object.0">NSTextField</string>
 					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">closeButtonClicked:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">closeButtonClicked:</string>
-							<string key="candidateClassName">id</string>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">titleLabel</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">titleLabel</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

@@ -12,5 +12,6 @@
 
 @property (nonatomic, copy) void (^closeBlock)(id sender);
 @property (nonatomic, copy) NSArray *errorItems;
+@property (nonatomic, assign) IBOutlet NSTextField *titleLabel;
 
 @end

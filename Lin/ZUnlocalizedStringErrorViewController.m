@@ -26,6 +26,16 @@
     self.closeBlock(sender);
 }
 
+- (void)setErrorItems:(NSArray *)errorItems
+{
+    _errorItems = errorItems;
+    NSString *titleFormat = @"%@ unlocalized string%@ found in current workspace";
+    NSString *count = [@(errorItems.count) stringValue];
+    NSString *title = [NSString stringWithFormat:titleFormat, ([count isEqualToString:@"0"] ? @"No" : count),
+                       ([count isEqualToString:@"1"] ? @"" : @"s")];
+    [self.titleLabel setStringValue:title];
+}
+
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

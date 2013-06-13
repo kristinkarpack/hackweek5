@@ -52,17 +52,31 @@
     
     
     // Also sort the localization keys by library
-    NSMutableDictionary *localizationKeysFromStringsFilesGroupedByLibrary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localizationKeysFromStringsFilesGroupedByLibraryAndLanguage = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *allLanguagesGroupedByLibraries = [[NSMutableDictionary alloc] init];
     for (LocalizationItem *item in [localization localizationItems])
     {
         NSString *library = [ZLocalizableParser getLibraryNameFromStringsFilename:item.stringsFilename];
-        NSMutableArray *allKeysForLibrary = [localizationKeysFromStringsFilesGroupedByLibrary objectForKey:library];
+        NSMutableDictionary *allKeysForLibrary = [localizationKeysFromStringsFilesGroupedByLibraryAndLanguage objectForKey:library];
         if (allKeysForLibrary == nil)
         {
-            allKeysForLibrary = [NSMutableArray array];
-            [localizationKeysFromStringsFilesGroupedByLibrary setObject:allKeysForLibrary forKey:library];
+            allKeysForLibrary = [[NSMutableDictionary alloc] init];
+            [localizationKeysFromStringsFilesGroupedByLibraryAndLanguage setObject:allKeysForLibrary forKey:library];
         }
-        [allKeysForLibrary addObject:item.key];
+        NSMutableArray *itemsForLibraryAndLanguage = [allKeysForLibrary objectForKey:item.language];
+        if (itemsForLibraryAndLanguage == nil)
+        {
+            itemsForLibraryAndLanguage = [NSMutableArray array];
+            [allKeysForLibrary setObject:itemsForLibraryAndLanguage forKey:item.language];
+        }
+        [itemsForLibraryAndLanguage addObject:item.key];
+        NSMutableSet *allLanguagesForLibrary = [allLanguagesGroupedByLibraries objectForKey:library];
+        if (allLanguagesForLibrary == nil)
+        {
+            allLanguagesForLibrary = [[NSMutableSet alloc] init];
+            [allLanguagesGroupedByLibraries setObject:allLanguagesForLibrary forKey:library];
+        }
+        [allLanguagesForLibrary addObject:item.language];
     }
     
     NSMutableArray *errors = [NSMutableArray array];
@@ -72,38 +86,21 @@
     for (NSString *library in [dictionaryOfKeysGroupedByLibrary allKeys])
     {
         NSArray *keysInSourceFiles = [dictionaryOfKeysGroupedByLibrary objectForKey:library];
-        NSArray *keysInStringsFiles = [localizationKeysFromStringsFilesGroupedByLibrary objectForKey:library];
+        NSMutableDictionary *keysInStringsFilesGroupedByLanguage = [localizationKeysFromStringsFilesGroupedByLibraryAndLanguage objectForKey:library];
+        NSSet *allLanguagesForLibrary = [allLanguagesGroupedByLibraries objectForKey:library];
         for (NSString *keyInSourceFile in keysInSourceFiles)
         {
-            if (![keysInStringsFiles containsObject:keyInSourceFile])
+            for (NSString *language in allLanguagesForLibrary)
             {
-                [errors addObject:[NSString stringWithFormat:@"Cannot find value for key \"%@\" in library %@", keyInSourceFile, library]];
+                NSArray *keysInStringsFilesForLangauge = [keysInStringsFilesGroupedByLanguage objectForKey:language];
+                if (![keysInStringsFilesForLangauge containsObject:keyInSourceFile])
+                {
+                    [errors addObject:[NSString stringWithFormat:@"Missing key \"%@\" in library %@ for language \"%@\"", keyInSourceFile, library, language]];
+                }
             }
         }
     }
     return errors;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end
