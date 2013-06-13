@@ -137,11 +137,15 @@
 		818D293F17624D890039D0B0 /* HackWeekAdditions */ = {
 			isa = PBXGroup;
 			children = (
+				816A75E31766389900086199 /* PopoverAddItemView.h */,
+				816A75E41766389900086199 /* PopoverAddItemView.m */,
 				818D294017624DB60039D0B0 /* ZLocalizableParser.h */,
 				818D294117624DB60039D0B0 /* ZLocalizableParser.m */,
 				81DFE59B1767DA0000101998 /* ZFindNonlocalized.h */,
 				81DFE59C1767DA0000101998 /* ZFindNonlocalized.m */,
 				81F4A7EB1769178A00388114 /* ZUnlocalizedStringErrorView.xib */,
+				8171D4381762A5AC007FDAF8 /* LocalizationTestItems.h */,
+				8171D4391762A5AC007FDAF8 /* LocalizationTestItems.m */,
 				81C6D80A17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.h */,
 				81C6D80B17691E420007B3F2 /* ZUnlocalizedStringErrorViewController.m */,
 			);
@@ -161,8 +165,6 @@
 		AA0ABDEC16EC852300DC3697 /* XcodeClasses */ = {
 			isa = PBXGroup;
 			children = (
-				811EC26B1767B92800B32965 /* RCXcode.h */,
-				811EC26C1767B92800B32965 /* RCXcode.m */,
 				AA3E93FA16EBE99A00BA6E60 /* IDEIndex.h */,
 				AA55627B16EDA3230094FA4D /* IDEIndexCollection.h */,
 				AAE7FEF616ED9DB200F47363 /* IDEEditorDocument.h */,
@@ -188,8 +190,6 @@
 				AAE9881016ECE84500E61B53 /* Localization.m */,
 				AA10659916ECF48600443AC5 /* LocalizationItem.h */,
 				AA10659A16ECF48600443AC5 /* LocalizationItem.m */,
-				8171D4381762A5AC007FDAF8 /* LocalizationTestItems.h */,
-				8171D4391762A5AC007FDAF8 /* LocalizationTestItems.m */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -200,8 +200,8 @@
 				AA401F9916EC8959001FF1DA /* PopoverContentView.h */,
 				AA401F9A16EC8959001FF1DA /* PopoverContentView.m */,
 				AA3CE14516EBBC9400E2C972 /* Popover.xib */,
-				816A75E31766389900086199 /* PopoverAddItemView.h */,
-				816A75E41766389900086199 /* PopoverAddItemView.m */,
+				811EC26B1767B92800B32965 /* RCXcode.h */,
+				811EC26C1767B92800B32965 /* RCXcode.m */,
 			);
 			name = Popover;
 			sourceTree = "<group>";

@@ -3,7 +3,7 @@
   Lin
 
   Created by Kristin Ivarson on 6/7/13.
-  Copyright (c) 2013 Katsuma Tanaka. All rights reserved.
+  Copyright (c) 2013 Kristin Ivarson. All rights reserved.
 */
 
 "key1" = "test1";
@@ -19,4 +19,3 @@
 "key6" = "test6";
 
 "key7" = "test7";
-"key555" = "test8675309";

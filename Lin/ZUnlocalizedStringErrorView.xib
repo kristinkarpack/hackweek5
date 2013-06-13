@@ -102,6 +102,7 @@
 						<string key="NSFrame">{{499, 15}, {72, 19}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="403441458">
@@ -214,7 +215,7 @@
 											</object>
 										</object>
 										<double key="NSRowHeight">20</double>
-										<int key="NSTvFlags">-1841299456</int>
+										<int key="NSTvFlags">-1832910848</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
 										<int key="NSColumnAutoresizingStyle">4</int>

@@ -3,7 +3,7 @@
 //  Lin
 //
 //  Created by Kristin Ivarson on 6/7/13.
-//  Copyright (c) 2013 Katsuma Tanaka. All rights reserved.
+//  Copyright (c) 2013 Kristin Ivarson. All rights reserved.
 //
 
 @interface ZLocalizableParser : NSObject 
@@ -12,6 +12,6 @@
 
 + (NSString *)getLibraryNameFromSourceFilename:(NSString *)filename;
 
-+ (NSString *)getBestStringsFileForFile:(NSString *)fileName   fromList:(NSArray *)stringFiles;
++ (NSString *)getBestStringsFileForFile:(NSString *)fileName fromList:(NSArray *)stringFiles;
 
 @end

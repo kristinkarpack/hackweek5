@@ -3,7 +3,7 @@
 //  Lin
 //
 //  Created by Kristin Ivarson on 6/11/13.
-//  Copyright (c) 2013 Katsuma Tanaka. All rights reserved.
+//  Copyright (c) 2013 Kristin Ivarson. All rights reserved.
 //
 
 #import "ZFindNonlocalized.h"
@@ -12,13 +12,16 @@
 
 #define NSLOCALIZED_REGEX @"LocalizedString\\s*?\\(\\s*?@\"(.*?)\"\\s*?,\\s*(.*?)\\s*?\\)"
 #define UNLOCALIZED_REGEX @"(.*?)@\"(.*?)\""
-// Try to avoid nib and image names, CoreData strings, dictionary keys, debug logs and asserts, etc.
-#define EXCLUDE_STRINGS @[@"NSNotificationCenter", @"NibNamed", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"bundle", @"event", @"NSFetch", @"_PROPERTY(", @"predicateWithFormat", @"pathForResource", @"fileURLWithPath", @"fontWithName", @"stringByAppendingPathComponent"]
 
 @implementation ZFindNonlocalized
 
 + (void)searchForUnlocalizedStringsForIndex:(IDEIndex *)index completionBlock:(void (^)(NSArray *errors))block
 {
+    // Try to avoid nib and image names, CoreData fetches, dictionary keys, debug logs and asserts, etc.
+    NSArray *excludeStrings = @[@"Notification", @"NibName", @"isKindOfClass", @"Log", @"assert", @"image", @"objectForKey", @"LocalizedString", @"bundle", @"event", @"NSFetch", @"_PROPERTY(", @"predicateWithFormat", @"pathForResource", @"fileURLWithPath", @"fontWithName", @"stringByAppendingPathComponent", @"key", @"url", @"Exception", @"accessibilitystring", @"regularexpression", @"entitydescription"];
+    
+    NSArray *excludeFilePaths = @[@"Test", @".strings", @"Pods"];
+    
     // Get all files to parse calls from
     IDEIndexCollection *indexCollection = [index filesContaining:@".m" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
     
@@ -26,8 +29,15 @@
     
     for(DVTFilePath *filePath in indexCollection) {
         NSString *pathString = filePath.pathString;
-        if (([pathString rangeOfString:@"Test"].location == NSNotFound) && ([pathString rangeOfString:@".strings"].location == NSNotFound))
+        BOOL shouldExclude = NO;
+        for (NSString *exclude in excludeFilePaths)
         {
+            if ([pathString rangeOfString:exclude options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                shouldExclude = YES;
+            }
+        }
+        if (!shouldExclude) {
             [fileSet addObject:pathString];
         }
     }
@@ -45,7 +55,7 @@
          {
              NSString *match = [[contents substringWithRange:[result range]] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
              BOOL shouldExclude = NO;
-             for (NSString *exclude in EXCLUDE_STRINGS)
+             for (NSString *exclude in excludeStrings)
              {
                  if ([match rangeOfString:exclude options:NSCaseInsensitiveSearch].location != NSNotFound)
                  {
@@ -129,7 +139,6 @@
     NSMutableArray *errors = [NSMutableArray array];
     
     // Now look at the difference between the two sets
-    // TODO(kristini): add extra loop to deal with having a corresponding value for every langauge (one to many relationship)
     for (NSString *library in [dictionaryOfKeysGroupedByLibrary allKeys])
     {
         NSArray *keysInSourceFiles = [dictionaryOfKeysGroupedByLibrary objectForKey:library];
@@ -142,7 +151,7 @@
                 NSArray *keysInStringsFilesForLangauge = [keysInStringsFilesGroupedByLanguage objectForKey:language];
                 if (![keysInStringsFilesForLangauge containsObject:keyInSourceFile])
                 {
-                    [errors addObject:[NSString stringWithFormat:@"Missing key \"%@\" in library %@ for language \"%@\"", keyInSourceFile, library, language]];
+                    [errors addObject:[NSString stringWithFormat:@"Missing value for key \"%@\" in library %@ for language \"%@\"", keyInSourceFile, library, language]];
                 }
             }
         }
