@@ -9,5 +9,5 @@ Building on [the original XCode plugin for displaying localized string macros](h
 
 **Search workspace for keys that don't have values for one or more languages**
 
-![Feature2](http://i.imgur.com/CD1ewne.png)
+![Feature2](http://i.imgur.com/Yy41BGK.png)
 
