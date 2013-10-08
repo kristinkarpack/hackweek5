@@ -12,9 +12,9 @@
 
 @property (nonatomic, copy) void (^closeBlock)(id sender);
 @property (nonatomic, copy) NSArray *errorItems;
-@property (nonatomic, assign) IBOutlet NSTextField *titleLabel;
-@property (nonatomic, assign) IBOutlet NSTableView *tableView;
-@property (nonatomic, assign) IBOutlet NSProgressIndicator *spinner;
-@property (nonatomic, assign) NSString *titleFormat;
+@property (nonatomic, strong) IBOutlet NSTextField *titleLabel;
+@property (nonatomic, strong) IBOutlet NSTableView *tableView;
+@property (nonatomic, strong) IBOutlet NSProgressIndicator *spinner;
+@property (nonatomic, strong) NSString *titleFormat;
 
 @end

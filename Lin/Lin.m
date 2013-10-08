@@ -25,7 +25,7 @@
 
 @interface RegEx : NSObject
 
-@property (nonatomic, retain) NSString *expression;
+@property (nonatomic, strong) NSString *expression;
 @property NSUInteger numberOfRanges;
 @property NSUInteger entityRangeInLineIndex;
 @property NSUInteger keyRangeInLineIndex;
@@ -37,10 +37,10 @@
 -(id) initWithExpression: ( NSString *) expression numberOfRanges: ( NSUInteger ) numberOfRanges entityRangeInLineIndex: ( NSUInteger ) entityRangeInLineIndex keyRangeInLineIndex: ( NSUInteger ) keyRangeInLineIndex
 {
 	if (self = [super init]) {
-		_expression = [NSString stringWithString: expression];
-		_numberOfRanges = numberOfRanges;
-		_entityRangeInLineIndex = entityRangeInLineIndex;
-		_keyRangeInLineIndex = keyRangeInLineIndex;
+		self.expression = [NSString stringWithString: expression];
+		self.numberOfRanges = numberOfRanges;
+		self.entityRangeInLineIndex = entityRangeInLineIndex;
+		self.keyRangeInLineIndex = keyRangeInLineIndex;
 	}
 	return self;
 }
@@ -100,7 +100,6 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         // Load Nib
         NSNib *nib = [[NSNib alloc] initWithNibNamed:@"Popover" bundle:bundle];
         [nib instantiateNibWithOwner:self topLevelObjects:nil];
-        [nib release];
 
         // Popover settings
         self.popover.delegate = self;
@@ -124,8 +123,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 		for(NSUInteger i=0;i<sizeof(regexs)/sizeof(NSString *);i++) {
 			[pTempRegexs addObject: [[RegEx alloc] initWithExpression: regexs[i] numberOfRanges:numberOfRanges[i] entityRangeInLineIndex:entityRangeInLineIndices[i] keyRangeInLineIndex:keyRangeInLineIndices[i]]];
 		}
-		_regexs = [NSArray arrayWithArray: pTempRegexs];
-		[pTempRegexs release];
+		self.regexs = [NSArray arrayWithArray: pTempRegexs];
         
         self.parseStringsOutsideProject = YES;
     }
@@ -160,13 +158,6 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_textView release];
-
-    [_currentWorkspacePath release];
-    [_localizationFileSets release];
-    [_localizations release];
-
-    [super dealloc];
 }
 
 - (void)addLocalizationItemInCurrentPathForKey:(NSString *)key value:(NSString *)value
@@ -299,19 +290,16 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         menuItem.state = enabled ? NSOnState : NSOffState;
 
 		[[editMenuItem submenu] addItem:menuItem];
-        [menuItem release];
 
         // Start searching for keys without values
 		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for keys missing values" action:@selector(startSearchForKeysWithoutValues:) keyEquivalent:@""];
         menuItem.target = self;
 		[[editMenuItem submenu] addItem:menuItem];
-        [menuItem release];
         
         // Start searching for unlocalized strings
 		menuItem = [[NSMenuItem alloc] initWithTitle:@"Search for unlocalized strings" action:@selector(startSearchForUnlocalizedStrings:) keyEquivalent:@""];
         menuItem.target = self;
 		[[editMenuItem submenu] addItem:menuItem];
-        [menuItem release];
     }
 }
 
@@ -486,7 +474,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         __block NSRange entityRangeInLine;
         __block NSRange keyRangeInLine;
 
-		for( RegEx *regEx in _regexs) {
+		for(RegEx *regEx in self.regexs) {
 			// Regular expression
 			NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regEx.expression options:0 error:NULL];
 
@@ -570,7 +558,7 @@ static NSUInteger keyRangeInLineIndices[] = { 1, 1, 1, 1, 1 };
         __block NSRange entityRangeInLine;
         __block NSRange keyRangeInLine;
 
-		for( RegEx *regEx in _regexs) {
+		for( RegEx *regEx in self.regexs) {
 			// Regular expression
 			NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regEx.expression options:0 error:NULL];
 

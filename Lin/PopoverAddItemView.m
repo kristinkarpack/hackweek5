@@ -54,15 +54,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self.keyField release];
-    [self.valueField release];
-    
-    [super dealloc];
-}
-
-
 - (NSTextField *)createCenteredTextFieldWithPlaceholder:(NSString *)placeholder atHeight:(float)y
 {
     float x = (self.frame.size.width/2) - (TEXT_FIELD_WIDTH / 2);

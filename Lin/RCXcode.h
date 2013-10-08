@@ -60,7 +60,7 @@
 @end
 
 @interface IDEStructureNavigator : NSObject
-@property (retain) NSArray *selectedObjects;
+@property (strong) NSArray *selectedObjects;
 @end
 
 @interface IDENavigableItemCoordinator : NSObject
@@ -88,11 +88,11 @@
 
 @interface IDESourceCodeComparisonEditor : NSObject
 @property (readonly) NSTextView *keyTextView;
-@property (retain) NSDocument *primaryDocument;
+@property (strong) NSDocument *primaryDocument;
 @end
 
 @interface IDESourceCodeEditor : NSObject
-@property (retain) NSTextView *textView;
+@property (strong) NSTextView *textView;
 - (IDESourceCodeDocument *)sourceCodeDocument;
 @end
 
@@ -111,7 +111,7 @@
 
 @interface IDEWorkspace : NSObject
 @property (readonly) DVTFilePath *representingFilePath;
-@property (retain) IDEIndex *index;
+@property (strong) IDEIndex *index;
 @property(readonly) DVTFilePath *filePath;
 - (void)_updateIndexableFiles:(id)arg1;
 @end

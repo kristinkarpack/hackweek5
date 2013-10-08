@@ -14,6 +14,6 @@
 
 @interface IDEEditorDocument : NSDocument
 
-@property (retain) DVTFilePath *filePath;
+@property (strong) DVTFilePath *filePath;
 
 @end

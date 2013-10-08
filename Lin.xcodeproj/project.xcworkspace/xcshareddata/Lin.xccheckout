@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C13F4C65-6911-4886-BEC5-A4C3AC13E6C9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Lin</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1EA221CC-F4E7-4397-B24F-41B0A44D286E</key>
+		<string>https://github.com/kristinivarson/hackweek5.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lin.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1EA221CC-F4E7-4397-B24F-41B0A44D286E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kristinivarson/hackweek5.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1EA221CC-F4E7-4397-B24F-41B0A44D286E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1EA221CC-F4E7-4397-B24F-41B0A44D286E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>hackweek5</string>
+		</dict>
+	</array>
+</dict>
+</plist>

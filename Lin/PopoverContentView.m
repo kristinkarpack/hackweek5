@@ -62,17 +62,6 @@
     [self.tableView reloadData];
 }
 
-- (void)dealloc
-{
-    [_localizationItems release];
-    [_filteredLocalizationItems release];
-    
-    [_keyFilter release];
-    
-    [super dealloc];
-}
-
-
 #pragma mark - Filtering
 
 - (void)updateFilteredItems
