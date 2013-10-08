@@ -15,6 +15,17 @@
 
 @implementation PopoverContentView
 
+- (id)initWithFrame:(NSRect)frameRect
+{
+    self = [super initWithFrame:frameRect];
+    if (self)
+    {
+        [[NSColor colorWithDeviceRed:1 green:1 blue:1 alpha:1] set];
+        [NSBezierPath fillRect:[self bounds]];
+    }
+    return self;
+}
+
 - (void)setTableView:(NSTableView *)tableView
 {
     _tableView = tableView;
@@ -22,6 +33,8 @@
     // Set double click action
     [_tableView setTarget:self];
     [_tableView setDoubleAction:@selector(doubleClicked:)];
+    //[_tableView setBackgroundColor:[NSColor whiteColor]];
+    //[[_tableView headerView] setInterfaceStyle:NSNextStepInterfaceStyle];
     
     // Register observer
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidEndEditing:) name:NSControlTextDidEndEditingNotification object:nil];

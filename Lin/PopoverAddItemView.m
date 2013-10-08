@@ -42,9 +42,8 @@
         
         NSButton *submitButton = [[NSButton alloc] initWithFrame:CGRectMake(390, 50, 70, 34)];
         [submitButton setTitle:@"Add"];
-        //[submitButton setButtonType:NSMomentaryLightButton];
+        [submitButton setButtonType:NSMomentaryLightButton];
         [submitButton setEnabled:YES];
-        [submitButton setBezelStyle:NSRoundedBezelStyle];
         [submitButton setAction:@selector(buttonPressed)];
         [submitButton setTarget:self];
         [self addSubview:submitButton];
